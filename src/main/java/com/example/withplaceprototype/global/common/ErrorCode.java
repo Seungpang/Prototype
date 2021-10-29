@@ -2,7 +2,9 @@ package com.example.withplaceprototype.global.common;
 
 public enum ErrorCode {
 
-    EMAIL_DUPLICATION(400, "U001", "Email is Duplication");
+    EMAIL_DUPLICATION(400, "U001", "Email is Duplication"),
+    NOT_FOUND_USER(400, "U002", "User not found")
+    ;
 
     private final String code;
     private final String message;
