@@ -1,15 +1,17 @@
-package com.example.withplaceprototype.global.common;
+package com.example.withplaceprototype.global.common.error;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
     private String message;
@@ -20,21 +22,18 @@ public class ErrorResponse {
 
     private String code;
 
-    private LocalDateTime timestamp;
-
     private ErrorResponse(final ErrorCode code, final List<FieldError> errors) {
         this.message = code.getMessage();
         this.status = code.getStatus();
         this.errors = errors;
         this.code = code.getCode();
-        this.timestamp = LocalDateTime.now();
     }
 
     private ErrorResponse(final ErrorCode code) {
         this.message = code.getMessage();
         this.status = code.getStatus();
         this.code = code.getCode();
-        this.timestamp = LocalDateTime.now();
+        this.errors = new ArrayList<>();
     }
 
     public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {
@@ -45,7 +44,19 @@ public class ErrorResponse {
         return new ErrorResponse(code);
     }
 
+    public static ErrorResponse of(final ErrorCode code, final List<FieldError> errors) {
+        return new ErrorResponse(code, errors);
+    }
+
+    public static ErrorResponse of(MethodArgumentTypeMismatchException e) {
+        final String value = e.getValue() == null ? "" : e.getValue().toString();
+        final List<ErrorResponse.FieldError> errors = ErrorResponse.FieldError.of(e.getName(), value, e.getErrorCode());
+        return new ErrorResponse(ErrorCode.INVALID_TYPE_VALUE, errors);
+    }
+
+
     @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class FieldError {
 
         private String field;

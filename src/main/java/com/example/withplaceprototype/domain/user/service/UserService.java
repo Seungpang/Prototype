@@ -1,16 +1,11 @@
 package com.example.withplaceprototype.domain.user.service;
 
-import static com.example.withplaceprototype.global.common.ErrorCode.EMAIL_DUPLICATION;
-import static com.example.withplaceprototype.global.common.ErrorCode.NOT_FOUND_USER;
+import static com.example.withplaceprototype.global.common.error.ErrorCode.NOT_FOUND_USER;
 
-import com.example.withplaceprototype.domain.exception.BusinessException;
 import com.example.withplaceprototype.domain.user.domain.entity.User;
 import com.example.withplaceprototype.domain.user.domain.repository.UserRepository;
 import com.example.withplaceprototype.domain.user.dto.UserDto;
-import com.example.withplaceprototype.domain.user.exception.UserDuplicatedEmailException;
 import com.example.withplaceprototype.domain.user.exception.UserNotFoundException;
-import com.example.withplaceprototype.global.common.ErrorCode;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,8 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public User signUp(User user) {
-        return userRepository.save(user);
+    public void signUp(User user) {
+        userRepository.save(user);
     }
 
 

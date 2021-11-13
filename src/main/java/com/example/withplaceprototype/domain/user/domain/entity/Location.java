@@ -16,4 +16,6 @@ public class Location {
     private Double longitude; //경도
 
     private Double latitued; //위도
+
+    //Haversine 공식을 이용한 거리계산
 }

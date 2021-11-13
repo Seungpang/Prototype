@@ -1,5 +1,6 @@
 package com.example.withplaceprototype.domain.user.domain.entity;
 
+import com.example.withplaceprototype.global.common.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "USER")
 @NoArgsConstructor
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

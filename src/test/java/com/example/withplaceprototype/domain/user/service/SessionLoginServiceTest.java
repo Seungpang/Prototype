@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import com.example.withplaceprototype.domain.user.domain.entity.User;
 import com.example.withplaceprototype.domain.user.exception.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

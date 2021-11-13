@@ -17,9 +17,15 @@ spring:
     open-in-view: false
     show-sql: true
 
+http:
+  client:
+    connectionTimeout: 3000
+    readTimeout: 7000
+    maxConnection: 50
+    maxConnPerRoute: 10
+
 logging.level:
   org.hibernate.SQL: debug
+
+
 #  org.hibernate.type: trace
-
-
-------

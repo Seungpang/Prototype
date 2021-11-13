@@ -1,18 +1,17 @@
 package com.example.withplaceprototype.domain.user.exception;
 
 import com.example.withplaceprototype.global.common.error.ErrorCode;
-import lombok.NoArgsConstructor;
 
-public class UserNotFoundException extends RuntimeException {
+public class UserDuplicatedEmailException extends RuntimeException {
 
     private ErrorCode errorCode;
 
-    public UserNotFoundException(String message, ErrorCode errorCode) {
+    public UserDuplicatedEmailException(String message, ErrorCode errorCode) {
         super(message);
         this.errorCode = errorCode;
     }
 
-    public UserNotFoundException(ErrorCode errorCode) {
+    public UserDuplicatedEmailException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
